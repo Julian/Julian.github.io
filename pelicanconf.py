@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
+from pathlib import Path
 
 AUTHOR = "Julian Berman"
 SITENAME = "Julian"
@@ -31,7 +32,7 @@ SOCIAL = [
 
 DEFAULT_PAGINATION = 10
 
-THEME = "notmyidea"
+THEME = Path(__file__).parent / "martin-pelican"
 
 ARTICLE_URL = "posts/{date:%Y}/{date:%m}/{date:%d}/{slug}/"
 ARTICLE_SAVE_AS = "posts/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html"
