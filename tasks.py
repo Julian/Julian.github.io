@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 from subprocess import run
-import os
-import shutil
 import sys
-import datetime
 
 from invoke import task
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
+
+
+OUTPUT_DIR = Path(__file__).parent / "output"
 
 
 def git(*args):
@@ -32,18 +33,8 @@ def regenerate(context):
 
 @task
 def serve(context):
-    """Serve site at http://localhost:8000/"""
-
-    class AddressReuseTCPServer(RootedHTTPServer):
-        allow_reuse_address = True
-
-    server = AddressReuseTCPServer(
-        CONFIG["deploy_path"],
-        ("", CONFIG["port"]),
-        ComplexHTTPRequestHandler)
-
-    sys.stderr.write("Serving on port {port} ...\n".format(**CONFIG))
-    server.serve_forever()
+    """Serve the site."""
+    run(["twist", "web", "--path", str(OUTPUT_DIR)])
 
 
 @task
@@ -63,4 +54,4 @@ def build(context):
 def publish(context):
     """Publish to GitHub Pages"""
     git("commit", "-m", "Regenerate output.")
-    git("subtree", "push", "--prefix", "output", "origin", "master")
+    git("subtree", "push", "--prefix", str(OUTPUT_DIR), "origin", "master")
