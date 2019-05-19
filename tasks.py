@@ -10,6 +10,10 @@ from invoke import task
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 
 
+def git(*args):
+    return run(["git"] + list(args))
+
+
 def pelican(*args):
     return run(["pelican"] + list(args))
 
@@ -58,6 +62,5 @@ def build(context):
 @task
 def publish(context):
     """Publish to GitHub Pages"""
-    run(
-        ["git", "subtree", "push", "--prefix", "output", "origin", "master"],
-    )
+    git("commit", "-m", "Regenerate output.")
+    git("subtree", "push", "--prefix", "output", "origin", "master")
