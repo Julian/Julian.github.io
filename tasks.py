@@ -2,10 +2,8 @@
 
 from pathlib import Path
 from subprocess import run
-import sys
 
 from invoke import task
-from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 
 
 OUTPUT_DIR = Path(__file__).parent / "output"
