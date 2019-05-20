@@ -54,4 +54,4 @@ def build(context):
 def publish(context):
     """Publish to GitHub Pages"""
     git("commit", "-m", "Regenerate output.")
-    git("subtree", "push", "--prefix", str(OUTPUT_DIR), "origin", "master")
+    git("subtree", "push", "--prefix", OUTPUT_DIR.name, "origin", "master")
