@@ -33,7 +33,7 @@ SOCIAL = [
 GITHUB_URL = "https://github.com/Julian"
 TWITTER_USERNAME = "JulianWasTaken"
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 25
 
 THEME = Path(__file__).parent / "martin-pelican"
 
