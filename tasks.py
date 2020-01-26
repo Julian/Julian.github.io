@@ -9,12 +9,13 @@ from invoke import task
 OUTPUT_DIR = Path(__file__).parent / "output"
 
 
-def git(*args):
-    return run(["git"] + list(args))
+def command(name):
+    return lambda *args: run([name] + list(args))
 
 
-def pelican(*args):
-    return run(["pelican"] + list(args))
+git = command("git")
+pelican = command("pelican")
+twist = command("twist")
 
 
 @task
@@ -32,7 +33,7 @@ def regenerate(context):
 @task
 def serve(context):
     """Serve the site."""
-    run(["twist", "web", "--path", str(OUTPUT_DIR)])
+    twist("web", "--path", str(OUTPUT_DIR))
 
 
 @task
