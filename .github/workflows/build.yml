@@ -24,5 +24,9 @@ jobs:
         git remote set-url --push origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build the site
+      run: invoke build
     - name: Publish the site
-      run: invoke publish
+      run: |
+        git add output
+        invoke publish
