@@ -11,8 +11,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: |
-      git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
+    - name: Fetch the existing branch
+      run: |
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/master:refs/remotes/origin/master
     - name: Set up Python
       uses: actions/setup-python@v1
       with:
