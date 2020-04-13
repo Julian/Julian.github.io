@@ -10,7 +10,7 @@ OUTPUT_DIR = Path(__file__).parent / "output"
 
 
 def command(name):
-    return lambda *args: run([name] + list(args))
+    return lambda *args: run([name] + list(args), check=True)
 
 
 git = command("git")
